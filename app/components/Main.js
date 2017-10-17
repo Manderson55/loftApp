@@ -1,109 +1,74 @@
-// Include React
-var React = require("react");
+import React from "react";
+import ReactDOM from "react-dom";
+
+import {
+  Router,
+  Route,
+  browserHistory,
+  IndexRoute,
+  Link
+} from 'react-router';
+
+import Routes from "./../Routes";
+
+//pages
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+
+import EmployeeList from './EmployeeList';
+import Schedule from './Schedule';
+import BulletinBoard from './BulletinBoard';
 
 
-var EmployeeList = require("./children/EmployeeList");
-var BulletinBoard = require("./children/BulletinBoard");
-var Schedule = require("./children/Schedule");
-//var SignUp = require("./children/SignUp");
-
-// Requiring our helper for making API calls
-var helpers = require("../utils/helpers");
-// Create the Main component
-var Main = React.createClass({
-//class Main extends React.Component ({
-
-  getInitialState: function() {
-    return { employeeList:[], schedule: "", bulletinBoard: "" };
-  },
-
-  //  On load display the employees from  the DB
-  componentDidMount: function() {
-      console.log("COMPONENT MOUNTED in main.js");
-
-    // The moment the page renders on page load, we will retrieve the existing employees.
-      helpers.getEmployees()
-           .then(function(response) {
-                console.log("inside .then ");
-                console.log(response);
-         
-                if (response !== this.state.employeeList) {
-                    console.log("EmployeeList", response.data);
-                    this.setState({employeeList: response.data});
-                }
-           }.bind(this));
-    },
-
-
-  // Here we render the component
-  render: function() {
-
-    return (
-      <div className="container">
-
-        <div className="row">
-
-          <div className="jumbotron">
-            <h1>LOFT App</h1>
-            <h3>Check the schedule, post requests and send messages to your co-workers!</h3>
-          </div>
-
-          <div className="row">
-            <div className="text-center">
-                <button className = "btn-lg">SIGN UP!</button>
-                <button className = "btn-lg">SIGN IN</button> 
-                <button className = "btn-lg">SIGN OUT</button> 
-            </div>
-          </div>
-
-
-
-
-
-          <div className="row">
-              <div className="col-sm-6"> 
-                 <div className="panel">
-                      <div className="panel-heading ">Loft Girls</div>
-                      <div className="panel-body">
-                            <EmployeeList employeeList={this.state.employeeList}>
-
-                            </EmployeeList>
-                      </div>
-                 </div>
-              </div>
-              <div className="col-sm-6"> 
-                 <div className="panel">
-                      <div className="panel-heading">This Week's Schedule</div>
-                      <div className="panel-body">
-                          <Schedule schedule={this.state.schedule}>
-                          </Schedule>
-                      </div>
-                 </div>
-              </div>
-          </div>
-
-          <div className="row">
-             <div className="col-sm-12"> 
-                 <div className="panel">
-                      <div className="panel-heading">
-                          Messages
-                      </div>
-                      <div className="panel-body panelBodyWidthHeight">
-                      
-                           <BulletinBoard bulletinBoard={this.state.bulletinBoard}>
-                                
-                          </BulletinBoard>
-                      </div>
-                  </div>
-              </div>
-          </div>          
+class Main extends React.Component {
  
-      </div>
 
-    </div>
-    );
-  }
-});
+	render(){
+		return (
+			<div className="container">
 
-// Export the component back for use in other files
-module.exports = Main;
+				<div className= "navigation">
+					<ul className="header">
+			          	   <li><Link to="/" activeClassName="active">Home</Link></li>
+			               <li><Link to="/signin" activeClassName="active">Sign In</Link></li>
+			               <li><Link to="/signup" activeClassName="active">Sign Up</Link></li>
+			               <li><Link to="/logout" activeClassName="active">Logout</Link></li>
+			               <li><Link to="/employeelist" activeClassName="active">Employees</Link></li>
+			               <li><Link to="/schedule" activeClassName="active">Schedule</Link></li>
+			               <li><Link to="/bulletinboard" activeClassName="active">Bulletin Board</Link></li>
+			        </ul>
+			    </div>
+
+			    <div className="jumbotron">
+			    	<h1>LOFT App</h1>
+				</div>
+
+			    <div className="row center-text">
+				    <h3>Check the schedule, post requests and send messages to your co-workers!</h3>
+				</div>
+
+				<hr/> 
+
+
+				<div className="content">
+
+					{this.props.children}
+
+
+				</div>
+
+				<div className="bottom">
+					<div className="row">
+                  		<div className="panel-heading copyright">Copyright MZA 2017</div>
+ 		
+                	</div>  
+				</div>
+
+			</div>
+
+		)
+	}
+
+
+};
+export default Main;

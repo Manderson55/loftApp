@@ -1,30 +1,17 @@
-// Include React
-var React = require("react");
+import React from "react";
+import ReactDOM from "react-dom";
 
-var Note = require("./Note");
+import Note from "./Note";
+
+class BulletinBoard extends React.Component {
 
 
-//class BulletinBoard extends React.Component ({
-var BulletinBoard = React.createClass({
- 
-	// propTypes:{
-	// 	count: function(props, propName){
-	// 		if (typeof props[propName] !== "number"){
-	// 			return new Error("the count must be a number")
-	// 		}
-
-	// 		if(props[propName] > 50) {
-	// 			return new Error("creating" + props[propName] + " is too large")
-	// 		}
-	// 	}
-
-	// },
-
-	getInitialState(){
-		return {
-			notes:[]
+	constructor(props){
+		super(props)
+		this.state = {
+			notes: []
 		}
-	},
+	}
 
 	add(text){
 		var notes = [
@@ -35,12 +22,12 @@ var BulletinBoard = React.createClass({
 			}
 		]
 		this.setState({notes})
-	},
+	}
 
 	nextId() {
 		this.uniqueId = this.uniqueId || 0
 		return this.uniqueId++
-	},
+	}
 
     update(newText, id) {
         var notes = this.state.notes.map(
@@ -52,12 +39,12 @@ var BulletinBoard = React.createClass({
                         }
                     )
                 this.setState({notes})
-    },
+    }
 
 	remove(id) {
 		var notes = this.state.notes.filter(note => note.id !== id)
 		this.setState({notes})
-	},
+	}
 
 	eachNote(note){
 		return(<Note key={note.id}
@@ -66,17 +53,24 @@ var BulletinBoard = React.createClass({
 					 onRemove={this.remove}>
 					 {note.note}
 				</Note>)
-	},
+	}
 
 	render(){
 		return (
-			<div className="bulletinBoard">
-				{this.state.notes.map(this.eachNote)}
-				<button className="addNote" onClick={() => this.add("New Note")}>+</button>
+            <div className = "container">
+
+                <div className="panel">
+                        <div className="panel-heading ">Bulletin Board</div>
+                        <div className="panel-body bulletinBoard">			
+			
+							{this.state.notes.map(this.eachNote)}
+							<button className="addNote" onClick={() => this.add("New Note")}>+</button>
+						</div>
+				</div>		
 			</div>
 		)
 	}
 
 
-})
-module.exports = BulletinBoard;
+};
+export default BulletinBoard;

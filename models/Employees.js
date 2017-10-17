@@ -14,15 +14,18 @@ var EmployeesSchema = new Schema({
     trim: true,
     required: "Last Name is Required"
   },
-  userName: {
-    type: String,
-    trim: true,
-    required: "User Name is Required"
+  employeeNumber: {
+    type:{Number, max: 6, min: 6 },
+    required: "Employee Number is Required"
   },
   title: {
     type: String,
     trim: true,
     required: "Title is Required"
+  },
+  phoneNumber: {
+    type:{Number, max: 9, min: 9 }
+
   },
   password: {
   	type: String,

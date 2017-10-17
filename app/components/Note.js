@@ -1,13 +1,13 @@
 // Include React
-var React = require("react");
-var ReactDraggable = require("react-draggable");
+import React from "react";
+import ReactDraggable from "react-draggable";
 
 //class BulletinBoard extends React.Component ({
-var Note = React.createClass({
+class Note extends React.Component {
 
 	getInitialState(){
 		return{editing: false}
-	},
+	}
 //this is not working, how do I determine the width and height of my component? They are rendering one 
 //of top of the other
 	componentWillMount() {
@@ -16,18 +16,18 @@ var Note = React.createClass({
 			top: this.randomBetween(0, this.innerHeight - 150, "px")
 		}
 
-	},
+	}
 
 	randomBetween(x, y, s) {
 		return (x + Math.ceil(Math.random() * (y-x))) + s
-	},
+	}
 
 	componentDidUpdate(){
 		if(this.state.editing){
 			this.refs.newText.focus()
 			this.refs.newText.select()
 		}
-	},
+	}
 	// // this prevents unnecessary re-rendering
 	// shouldComponentUpdate(nextProps, nextState){
 	// 	return this.props.children !== nextProps.children || this.state !== next.state 
@@ -36,17 +36,17 @@ var Note = React.createClass({
 
 	edit(){
 		this.setState({editing: true})
-	},
+	}
 
 	save(){
 		this.props.onChange(this.refs.newText.value, this.props.id)
 		this.setState({editing: false})
-	},
+	}
 	//add the save to db here
 
 	remove(){
 		this.props.onRemove(this.props.id)
-	},
+	}
 	//add the delete from db here
 
 
@@ -54,7 +54,7 @@ var Note = React.createClass({
 
 		this.setState({})
 
-	},
+	}
 
 	renderForm(){
 		return (
@@ -65,7 +65,7 @@ var Note = React.createClass({
 				<button onClick={this.save}>Save</button>
 			</div>
 			)
-	},
+	}
 
 	renderDisplay(){
 		return (
@@ -78,7 +78,7 @@ var Note = React.createClass({
 				</span>
 			</div>
 			)
-	},
+	}
 
 	render() {
 		return (<ReactDraggable>
@@ -87,5 +87,5 @@ var Note = React.createClass({
 				</ReactDraggable>
 			)
 		}
-});
-module.exports = Note;
+};
+export default Note;

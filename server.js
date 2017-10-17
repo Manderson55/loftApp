@@ -3,8 +3,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
-// Require  Schema
+// Require  Schemas
 var Employees = require('./models/Employees.js');
+var eNots = require('./models/Notes.js');
 
 // Create Instance of Express
 var app = express();
@@ -55,17 +56,14 @@ app.get("/api", function(req, res) {
 // This is the route we will send POST requests to save a new employee.
 // We will call this route when a user signs up
 app.post("/api", function(req, res) {
-
    console.log("adding an employee! app.post");
 
 });
 
-
-
 // -------------------------------------------------
 // Main "/" Route. This will redirect the user to our rendered React application
-app.get("/", function(req, res) {
-  res.send("__dirname" + "/public/index.html");
+app.get("*", function(req, res) {
+  res.sendFile("__dirname" + "/public/index.html");
 });
 
 // -------------------------------------------------
