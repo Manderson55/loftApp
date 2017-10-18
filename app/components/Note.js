@@ -5,9 +5,16 @@ import ReactDraggable from "react-draggable";
 //class BulletinBoard extends React.Component ({
 class Note extends React.Component {
 
-	getInitialState(){
-		return{editing: false}
+	constructor(props){
+		super(props)
+		this.state = {
+			note : [],
+			editing: false
+		}
 	}
+	// getInitialState(){
+	// 	return{editing: false}
+	// }
 //this is not working, how do I determine the width and height of my component? They are rendering one 
 //of top of the other
 	componentWillMount() {
@@ -35,12 +42,12 @@ class Note extends React.Component {
 	// },
 
 	edit(){
-		this.setState({editing: true})
+		this.state = ({editing: true})
 	}
 
 	save(){
 		this.props.onChange(this.refs.newText.value, this.props.id)
-		this.setState({editing: false})
+		this.state = ({editing: false})
 	}
 	//add the save to db here
 

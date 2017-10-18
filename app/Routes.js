@@ -4,6 +4,7 @@ import {
   Route,
   browserHistory,
   IndexRoute,
+  IndexLink,
   Link
 } from 'react-router';
 
@@ -25,7 +26,6 @@ const Routes = () => (
     <Router history={browserHistory}>
 
         <Route exact path="/" match component={Main}>
-  
                 <Route path="/signup" component={SignUp}/>
                 <Route path="/signin" component={SignIn}/>
                 <Route path="/logout" component={Logout}/>

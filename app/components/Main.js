@@ -6,6 +6,7 @@ import {
   Route,
   browserHistory,
   IndexRoute,
+  IndexLink,
   Link
 } from 'react-router';
 
@@ -29,7 +30,7 @@ class Main extends React.Component {
 
 				<div className= "navigation">
 					<ul className="header">
-			          	   <li><Link to="/" activeClassName="active">Home</Link></li>
+			          	   <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
 			               <li><Link to="/signin" activeClassName="active">Sign In</Link></li>
 			               <li><Link to="/signup" activeClassName="active">Sign Up</Link></li>
 			               <li><Link to="/logout" activeClassName="active">Logout</Link></li>

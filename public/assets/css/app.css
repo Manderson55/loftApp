@@ -1,5 +1,10 @@
 body {
-panel-heading
+  panel-heading
+}
+
+img.schedule {
+    max-width: 500px;
+
 }
 
 .jumbotron {
@@ -30,17 +35,22 @@ panel-heading
 	font-size: 30px;
 }
 
+.panel-body {
+  text-align: center;
+}
+
 /* Bulletin Board css */
 
 @import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light);
 
-body,
+/*body,
 html,
 div.board,
 div#react-container {
   height: 100%;
   overflow: hidden;
 }
+*/
 
 body {
   margin: 0;
@@ -175,4 +185,24 @@ panel-body {
 .copyright {
   font-size: 14px;
   font-weight: bold;
+}
+
+.employeeInfo ul li {
+  font-size: 35px;
+}
+
+thead {color:black;}
+tbody {color:grey;}
+
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 35px;
+}
+
+table {
+  width: 100%;
+  margin: 20px;
+
 }

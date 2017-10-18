@@ -49,8 +49,9 @@ class BulletinBoard extends React.Component {
 	eachNote(note){
 		return(<Note key={note.id}
 					 id={note.id}
-					 onChange={this.update}
-					 onRemove={this.remove}>
+					 // onChange={this.update}
+					 // onRemove={this.remove}
+					 >
 					 {note.note}
 				</Note>)
 	}

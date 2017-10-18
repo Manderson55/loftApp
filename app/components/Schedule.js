@@ -7,14 +7,15 @@ class Schedule extends React.Component {
     render() {
 
         return (
-           <div className = "container">
+            <div className = "container">
 
                 <div className="panel">
                     <div className="panel-heading ">Schedule</div>
                     <div className="panel-body pdf-container">
-                        <label htmlFor="file">Load from file:</label>
-                        <input type="file" />
-                     </div>
+
+                        <img className="schedule" alt="schedule" src="/assets/images/schedule.jpg"/>
+
+                    </div>
                 </div>
             </div>
         )
@@ -23,5 +24,4 @@ class Schedule extends React.Component {
 
 };
 
-// Export the component back for use in other files
 export default Schedule;
