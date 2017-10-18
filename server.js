@@ -1,16 +1,20 @@
 // Include Server Dependencies
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require('passport');
+const session = require('express-session');
+
+mongoose.Promise = global.Promise;
 
 // Require  Schemas
-var Employees = require('./models/Employees.js');
-var eNots = require('./models/Notes.js');
+const Employees = require('./models/Employees.js');
+const eNots = require('./models/Notes.js');
 
 // Create Instance of Express
-var app = express();
+const app = express();
 // Sets an initial port. We'll use this later in our listener
-var PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json());
@@ -18,13 +22,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+app.use(session({
+    secret:'ilovereact',
+    resave:true,
+    saveUninitialized: true
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+require('./passport')();
+
 app.use(express.static("public"));
+
+
 
 // -------------------------------------------------
 
 // MongoDB Configuration configuration (Change this URL to your own DB)
 mongoose.connect("mongodb://localhost/loftapp_db");
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on("error", function(err) {
   console.log("Mongoose Error: ", err);
@@ -33,6 +52,29 @@ db.on("error", function(err) {
 db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
+
+// Employees.create({firstName:'accimeesterlin'})
+
+
+
+
+app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect:'/Schedule',
+    failureRedirect:'/signup'
+}));
+
+
+app.post('/signin', passport.authenticate('local-signin', {
+    successRedirect:'/Schedule',
+    failureRedirect:'/signin'
+}));
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 
 
 // At the "/api" path, display every entry in the employees collection

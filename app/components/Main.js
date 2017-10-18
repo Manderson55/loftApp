@@ -33,7 +33,7 @@ class Main extends React.Component {
 			          	   <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
 			               <li><Link to="/signin" activeClassName="active">Sign In</Link></li>
 			               <li><Link to="/signup" activeClassName="active">Sign Up</Link></li>
-			               <li><Link to="/logout" activeClassName="active">Logout</Link></li>
+			               <li><a href="/logout" activeClassName="active">Logout</a></li>
 			               <li><Link to="/employeelist" activeClassName="active">Employees</Link></li>
 			               <li><Link to="/schedule" activeClassName="active">Schedule</Link></li>
 			               <li><Link to="/bulletinboard" activeClassName="active">Bulletin Board</Link></li>
