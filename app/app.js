@@ -2,7 +2,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Main from "./components/Main";
 import Routes from "./Routes";
 
 const app =  document.getElementById("app");

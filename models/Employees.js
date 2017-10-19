@@ -1,42 +1,52 @@
 // Include the Mongoose Dependencies
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const bcrypt = require('bcrypt');
 
 
-var EmployeesSchema = new Schema({
+const EmployeesSchema = new Schema({
   firstName: {
     type: String,
-    trim: true,
-    required: "First Name is Required"
+    trim: true
+    // required: "First Name is Required"
   },
   lastName: {
     type: String,
-    trim: true,
-    required: "Last Name is Required"
+    trim: true
+    // required: "Last Name is Required"
   },
   employeeNumber: {
-    type:{Number, max: 6, min: 6 },
-    required: "Employee Number is Required"
+    type:{Number}, // max: 6, min: 6
+    // required: "Employee Number is Required"
   },
   title: {
     type: String,
-    trim: true,
-    required: "Title is Required"
+    trim: true
+    // required: "Title is Required"
   },
   phoneNumber: {
-    type:{Number, max: 9, min: 9 }
+    type:{Number } // max: 9, min: 9
 
   },
   password: {
   	type: String,
-  	trim: true,
-  	required: "Password is Required"
+  	trim: true
+  	// required: "Password is Required"
   }
 
 });
 
+
+EmployeesSchema.methods.generalHash = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+EmployeesSchema.methods.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.password)
+};
 // Create the Model
-var Employees = mongoose.model('Employees', EmployeesSchema);
+const Employees = mongoose.model('Employees', EmployeesSchema);
 
 // Export it for use elsewhere
 module.exports = Employees;
