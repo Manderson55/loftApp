@@ -33,7 +33,7 @@ class Main extends React.Component {
 			          	   <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
 			               <li><Link to="/signin" activeClassName="active">Sign In</Link></li>
 			               <li><Link to="/signup" activeClassName="active">Sign Up</Link></li>
-			               <li><a href="/logout" activeClassName="active">Logout</a></li>
+			               <li><a href="/logout">Logout</a></li>
 			               <li><Link to="/employeelist" activeClassName="active">Employees</Link></li>
 			               <li><Link to="/schedule" activeClassName="active">Schedule</Link></li>
 			               <li><Link to="/bulletinboard" activeClassName="active">Bulletin Board</Link></li>
@@ -45,7 +45,11 @@ class Main extends React.Component {
 				</div>
 
 			    <div className="row center-text">
-				    <h3>Check the schedule, post requests and send messages to your co-workers!</h3>
+			    	<h1>Welcome to your LOFT App</h1>
+			    	<hr />
+			    	<h3>This application will allow you to view your weekly schedule and connect with your fellow associates by sending them notes in the bulletin board or by accessing their information in the Employees Section and sending them private requests. You need to sign up to be able to view the information contained on this app.</h3>
+			    	<br />
+				    <h3>Let's stay connected!</h3>
 				</div>
 
 				<hr/> 

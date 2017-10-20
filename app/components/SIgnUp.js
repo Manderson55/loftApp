@@ -18,48 +18,6 @@ class SignUp extends React.Component {
       }
     }
 
-    //create a drop-down for employee type
-    // static defaultProps = {
-    //     titles: [
-    //         "Sales Associate",
-    //         "Sales Lead",
-    //         "Manager",
-    //         "Co-Manager"
-    //     ]
-    // }
-                  // <div>
-                  //     <label>Title</label>
-                  //     <br />
-                  //     <select ref="title">
-                  //         titleOptions{}
-                  //     </select>
-                  // </div>
-
-    //
-    // //function for submitting the form
-    // handleSubmit(event){
-    //   event.preventDefault();
-    //   console.log("Submitted");
-    //   this.setState({newEmployee: {
-    //       firstName: this.refs.firstName.value,
-    //       lastName: this.refs.lastName.value,
-    //       employeeNumber: this.refs.employeeNumber.value,
-    //       title: this.refs.title.value,
-    //       phoneNumber: this.refs.phoneNumber.value,
-    //       password: this.refs.password.value
-    //   }}, function(){
-    //       console.log(this.state);
-    //
-    //       //pass the date as a property to the main component here
-    //       helpers.addEmployee(this.state.newEmployee)
-    //       .then(function()
-    //         {
-    //             console.log("Posted new employee to mongo db!")
-    //
-    //         });
-    //   });
-    // }
-
     // Here we render the component
     render() {
       return (
@@ -68,44 +26,59 @@ class SignUp extends React.Component {
                <div>
                   <h3>Sign Up!</h3>
                   <form className="inputForms" action="/signup" method="POST">
-                      <div>
-                          <label>First Name</label>
-                          <br />
-                          <input type="text" ref="firstName" name="firstName" />
+                     <div className="form-group row has-danger">
+                        <label className="col-sm-2 col-form-label">First Name</label>
+                        <div className="col-sm-8 input-group">
+                            <span className="input-group-addon"><i className="fa fa-user-o"></i></span>
+                            <input type="text" name="firstName" ref="firstName" className="form-control" id="firstName" placeholder="Enter your First Name" required />
+                        </div>
                       </div>
-                      <div>
-                          <label>Last Name</label>
-                          <br />
-                          <input type="text" ref="lastName" name="lastName" />
+
+                     <div className="form-group row has-danger">
+                        <label className="col-sm-2 col-form-label">Last Name</label>
+                        <div className="col-sm-8 input-group">
+                            <span className="input-group-addon"><i className="fa fa-user-o"></i></span>
+                            <input type="text" name="lastName" ref="lastName" className="form-control" id="firstName" placeholder="Enter your Last Name" required />
+                        </div>
                       </div>
-                      <div>
-                          <label>Employee Number</label>
-                          <br />
-                          <input type="number" ref="employeeNumber" name="employeeNumber" />
+
+                     <div className="form-group row has-danger">
+                        <label className="col-sm-2 col-form-label">Title</label>
+                        <div className="col-sm-8 input-group">
+                            <span className="input-group-addon"><i className="fa fa-user-o"></i></span>
+                            <select type="text" name="title" ref="title" className="form-control" id="title" required>
+                                  <option value="">Enter your Title</option>
+                                  <option value="salesAssociate">Sales Associate</option>
+                                  <option value="salesLead">Sales Lead</option>
+                                  <option value="manager">Manager</option>
+                                  <option value="coManager">Co-Manager</option>
+                            </select>
+                        </div>
                       </div>
-                      <div>
-                          <label>Title</label>
-                          <br />
-                          <input type="text" ref="title" name="title" />
-                              
+
+                     <div className="form-group row has-danger">
+                        <label className="col-sm-2 col-form-label">Employee Number</label>
+                        <div className="col-sm-8 input-group">
+                            <span className="input-group-addon"><i className="fa fa-user-o"></i></span>
+                            <input type="number" name="employeeNumber" ref="employeeNumber" className="form-control" id="employeeNumber" placeholder="Enter your Employee Number" required />
+                        </div>
                       </div>
-                      <div>
-                          <label>Phone Number</label>
-                          <br />
-                          <input type="number" ref="phoneNumber" name="phoneNumber" />
+
+                      <div className="form-group row has-danger">
+                        <label className="col-sm-2 col-form-label">Password</label>
+                        <div className="col-sm-8 input-group">
+                          <span className="input-group-addon"><i className="fa fa-key"></i></span>
+                          <input type="password" name="password" ref="password" className="form-control" id="password" placeholder="Password" required />
+                        </div>
                       </div>
-                      <div>
-                          <label>Password</label>
-                          <br />
-                          <input type="text" ref="password" name="password" />
-                      </div>
-                      <div>
-                          <label>Re-enter Password</label>
-                          <br />
-                          <input type="text" ref="password" />
-                      </div>
-                      <input className="submitButton" type="submit" value="Sign Up!" />
-                  </form> 
+
+                     <div className="form-group row">
+                          <div className="col-sm-12 input-group signUpButton">
+                             <button type="submit" className="col-sm-8 col-sm-offset-2 submitButton btn btn-info">Sign Up</button>
+                          </div>
+                    </div>
+                    </form> 
+
               </div>
           </div>
         )

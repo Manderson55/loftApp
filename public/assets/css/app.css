@@ -206,3 +206,6 @@ table {
   margin: 20px;
 
 }
+.col-form-label {
+  text-align: right;
+}

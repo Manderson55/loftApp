@@ -29,7 +29,7 @@ module.exports = function () {
         usernameField: 'employeeNumber',
         passwordField:'password',
         passReqToCallback: true
-    }, function (req, email, password, done) {
+    }, function (req, employeeNumber, password, done) {
 
         console.log(req.body);
 
@@ -41,7 +41,9 @@ module.exports = function () {
 
 
             if(user){
-                return done(null, false, 'Employee already existed!!');
+                console.log ("Employee has already Signed Up!");
+                return done(null, false, 'Employee already exist!!');
+
             }
 
 
@@ -69,48 +71,34 @@ module.exports = function () {
         usernameField:'employeeNumber',
         passwordField:'password',
         passReqToCallback:true
-    }, function (req, email, password, done) {
+    }, function (req, employeeNumber, password, done) {
 
         User.findOne({'employeeNumber': req.body.employeeNumber}, function (err, user) {
-
+            console.log("employee number trying to sign in " + employeeNumber)
             if(err){
+                console.log(err)
                 return done(err)
             }
 
             if(!user){
-                return done(null, false, 'Sorry, not user found!!')
+                console.log('Sorry, employee not found!')
+                return done(null, false, 'Sorry, employee not found! Please Sign Up!')
             }
+            else {
+                console.log("encripted password ", user.validPassword)
+                console.log("sign in form password ", password)
+                if(!user.validPassword(password)){
+                     console.log("invalid password")
+                     return done(null, false, 'Password does not match!!')
+                }
 
-            if(user.validPassword(password)){
-                return done(null, false, 'Password does not match!!')
+                else{
+                    console.log("employee found!")
+                    return done(null, user);
+                }
             }
-
-            else{
-                return done(null, user);
-            }
-
 
         })
     }))
 
-
-
-
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
