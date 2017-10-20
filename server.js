@@ -153,5 +153,5 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.status(401).send("You must login");
+  res.status(401).send("You must sign in to access this files");
 }

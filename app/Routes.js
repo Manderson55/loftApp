@@ -25,12 +25,12 @@ const Routes = () => (
 
     <Router history={browserHistory}>
 
-        <Route exact path="/" match component={Main}>
-                <Route path="/signup" component={SignUp}/>
-                <Route path="/signin" component={SignIn}/>
-                <Route path= "/EmployeeList"  component={EmployeeList}/>
-                <Route path= "/Schedule"  component={Schedule}/>
-                <Route path= "/BulletinBoard"  component={BulletinBoard}/>
+        <Route exact path="/" match component={Main} history={browserHistory}>
+                <Route path="/signup" component={SignUp} history={browserHistory}/>
+                <Route path="/signin" component={SignIn} history={browserHistory}/>
+                <Route path= "/EmployeeList"  component={EmployeeList} history={browserHistory}/>
+                <Route path= "/Schedule"  component={Schedule} history={browserHistory}/>
+                <Route path= "/BulletinBoard"  component={BulletinBoard} history={browserHistory}/>
 
         </Route>
 

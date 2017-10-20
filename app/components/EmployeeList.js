@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 
 import helpers from "../utils/helpers";
 
+const axios = require("axios");
+
+import { Redirect } from 'react-router';
+
+
 // Create the Main component
 class EmployeeList extends React.Component {
 
@@ -28,6 +33,8 @@ class EmployeeList extends React.Component {
     componentWillMount() {
          console.log("COMPONENT MOUNTED in EmployeeList.js");
 
+         // Make a request for a user with a given ID 
+
     // The moment the page renders on page load, we will retrieve the existing employees.
         helpers.getEmployees()
         .then(function(response) {
@@ -44,6 +51,14 @@ class EmployeeList extends React.Component {
 // it is rendering before calling helpers.....!!!!!!!!
 
     render(){
+        axios.get("/isAuthenticated")
+           .then(function (response) {
+                 console.log(response);
+           })
+           .catch((error) => {
+                 console.log(error);
+                 this.props.route.history.push("/signin");
+           });
         console.log("inside render");
         console.log(this.props.employeeList);
         var list = this.props.employeeList;

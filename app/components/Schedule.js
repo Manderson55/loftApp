@@ -1,10 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+const axios = require("axios");
+
 class Schedule extends React.Component {
+
+
+
 
   // Here we render the component
     render() {
+        axios.get("/isAuthenticated")
+           .then(function (response) {
+                 console.log(response);
+           })
+           .catch((error) => {
+                 console.log(error);
+                 this.props.route.history.push("/signin");
+           });
 
         return (
             <div className = "container">
