@@ -16,16 +16,7 @@ class EmployeeList extends React.Component {
         super();
         this.state = {
            errors: { },
-           employeeList: [
-              {
-              employeeNumber:"",
-              firstName: "",
-              lastName:  "",
-              phoneNumber: "",
-              title:  "",
-              password:  ""
-              }
-          ]
+           employeeList: []
       }
     }
 
@@ -34,6 +25,14 @@ class EmployeeList extends React.Component {
          console.log("COMPONENT MOUNTED in EmployeeList.js");
 
          // Make a request for a user with a given ID 
+          axios.get("/isAuthenticated")
+           .then(function (response) {
+                 console.log(response);
+           })
+           .catch((error) => {
+                 console.log(error);
+                 this.props.route.history.push("/signin");
+           });
 
     // The moment the page renders on page load, we will retrieve the existing employees.
         helpers.getEmployees()
@@ -42,7 +41,7 @@ class EmployeeList extends React.Component {
               console.log("before setting var employeeList", response.data);
               var employeeList = response.data;
               console.log("after setting var employeeList", employeeList);
-              this.setState.employeeList;
+              this.setState({employeeList:employeeList});
 
         }.bind(this));
         console.log("After Bind ", this.state.employeeList);
@@ -51,14 +50,7 @@ class EmployeeList extends React.Component {
 // it is rendering before calling helpers.....!!!!!!!!
 
     render(){
-        axios.get("/isAuthenticated")
-           .then(function (response) {
-                 console.log(response);
-           })
-           .catch((error) => {
-                 console.log(error);
-                 this.props.route.history.push("/signin");
-           });
+
         console.log("inside render");
         console.log(this.props.employeeList);
         var list = this.props.employeeList;
@@ -79,21 +71,17 @@ class EmployeeList extends React.Component {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                                <td>Mariela Anderson</td>
-                                <td>Sales Associate</td>
-                                <td>888-888-8888</td>                               
-                            </tr>
-                             <tr>
-                                <td>Sarah Managern</td>
-                                <td>Manager</td>
-                                <td>555-555-5555</td>                               
-                            </tr>
-                              <tr>
-                                <td>Joe Key</td>
-                                <td>Key Holder</td>
-                                <td>777-777-7777</td>                               
-                            </tr>
+                          {this.state.employeeList.map((employee) => {
+                            if (employee.firstName || employee.lastName || employee.title || employee.phoneNumber) {
+                              return (
+                                <tr>
+                                    <td>{employee.firstName} {employee.lastName}</td>
+                                    <td>{employee.title}</td>
+                                    <td>{employee.phoneNumber}</td>                               
+                                </tr>
+                              );
+                            }
+                          })}
                           </tbody>                           
                         </table>
                     </div>
@@ -107,10 +95,3 @@ class EmployeeList extends React.Component {
 }; 
 
 export default EmployeeList;
-
-                           // {list.map(function(employee, index){
-                           //      return <li key={index}>{employee.firstName} {employee.lastName} <br />{employee.title}</li>;
-                           //   })}
- 
-
- 

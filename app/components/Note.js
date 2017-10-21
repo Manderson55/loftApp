@@ -89,8 +89,9 @@ class Note extends React.Component {
 
 	render() {
 		return (<ReactDraggable>
+
 				{(this.state.editing) ? this.renderForm()
-							 : this.renderDisplay()}
+                                      : this.renderDisplay()}
 				</ReactDraggable>
 			)
 		}
